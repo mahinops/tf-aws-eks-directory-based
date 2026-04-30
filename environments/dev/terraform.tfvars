@@ -1,0 +1,5 @@
+aws_region = "us-east-1"
+environment = "dev"
+managed_by = "terraform"
+project = "tf-workspace-aws-eks"
+author = "Mokhlesur Mahin"
