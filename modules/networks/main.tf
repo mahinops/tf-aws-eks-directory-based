@@ -12,7 +12,7 @@ resource "aws_subnet" "subnet-public-1" {
   availability_zone = var.availability_zones[0]
 
   tags = {
-    Name = "eks-subnet-${var.environment}"
+    Name = "eks-subnet-public-1-${var.environment}"
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "subnet-public-2" {
   availability_zone = var.availability_zones[1]
 
   tags = {
-    Name = "eks-subnet-${var.environment}"
+    Name = "eks-subnet-public-2-${var.environment}"
   }
 }
 
@@ -32,7 +32,7 @@ resource "aws_subnet" "subnet-private-1" {
   availability_zone = var.availability_zones[0]
 
   tags = {
-    Name = "eks-subnet-${var.environment}"
+    Name = "eks-subnet-private-1-${var.environment}"
   }
 }
 
@@ -42,7 +42,7 @@ resource "aws_subnet" "subnet-private-2" {
   availability_zone = var.availability_zones[1]
 
   tags = {
-    Name = "eks-subnet-${var.environment}"
+    Name = "eks-subnet-private-2-${var.environment}"
   }
 }
 
@@ -75,3 +75,4 @@ resource "aws_nat_gateway" "main" {
 
   depends_on = [aws_internet_gateway.main]
 }
+
