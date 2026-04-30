@@ -33,5 +33,10 @@ module "networks" {
   private_subnet_cidr_block_1 = var.private_subnet_cidr_block_1
   private_subnet_cidr_block_2 = var.private_subnet_cidr_block_2
   availability_zones           = var.availability_zones
-  
+}
+
+module "iam" {
+  source = "../../modules/iam"
+
+  environment    = var.environment
 }

@@ -1,3 +1,5 @@
+# vpc outputs 
+
 output "vpc_id" {
   value = module.networks.vpc_id
 }
@@ -28,4 +30,23 @@ output "public_route_table_id" {
 
 output "private_route_table_id" {
   value = module.networks.private_route_table_id
+}
+
+
+# iam outputs
+
+output "iam_role_name" {
+  value = module.iam.iam_role_name
+}
+
+output "iam_role_arn" {
+  value = module.iam.iam_role_arn
+}
+
+output "nodegroup_role_name" {
+  value = module.iam.nodegroup_role_name
+}
+
+output "nodegroup_role_arn" {
+  value = module.iam.nodegroup_role_arn
 }
