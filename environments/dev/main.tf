@@ -5,6 +5,10 @@ terraform {
       version = "~> 6.0"
     }
   }
+
+  backend "local" {
+    path = "../../statefiles/dev/terraform.tfstate"
+  }
 }
 
 provider "aws" {
@@ -17,4 +21,13 @@ provider "aws" {
       Author       = var.author
     }
   }
+}
+
+module "networks" {
+  source = "../../modules/networks"
+
+  vpc_cidr_block = var.vpc_cidr_block
+  environment    = var.environment
+  project        = var.project
+  
 }
