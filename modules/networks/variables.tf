@@ -10,12 +10,6 @@ variable "environment" {
   default     = ""
 }
 
-variable "project" {
-  description = "The project name"
-  type        = string
-  default     = ""
-}
-
 variable "public_subnet_cidr_block_1" {
   description = "CIDR block for the first public subnet"
   type        = string

@@ -3,8 +3,6 @@ resource "aws_vpc" "main" {
 
   tags = {
     Name        = "eks-vpc-${var.environment}"
-    Environment = var.environment
-    Project     = var.project  
   }
 }
 
@@ -14,9 +12,7 @@ resource "aws_subnet" "subnet-public-1" {
   availability_zone = var.availability_zones[0]
 
   tags = {
-    Name        = "eks-subnet-${var.environment}"
-    Environment = var.environment
-    Project     = var.project
+    Name = "eks-subnet-${var.environment}"
   }
 }
 
@@ -26,9 +22,7 @@ resource "aws_subnet" "subnet-public-2" {
   availability_zone = var.availability_zones[1]
 
   tags = {
-    Name        = "eks-subnet-${var.environment}"
-    Environment = var.environment
-    Project     = var.project
+    Name = "eks-subnet-${var.environment}"
   }
 }
 
@@ -38,9 +32,7 @@ resource "aws_subnet" "subnet-private-1" {
   availability_zone = var.availability_zones[0]
 
   tags = {
-    Name        = "eks-subnet-${var.environment}"
-    Environment = var.environment
-    Project     = var.project
+    Name = "eks-subnet-${var.environment}"
   }
 }
 
@@ -50,9 +42,7 @@ resource "aws_subnet" "subnet-private-2" {
   availability_zone = var.availability_zones[1]
 
   tags = {
-    Name        = "eks-subnet-${var.environment}"
-    Environment = var.environment
-    Project     = var.project
+    Name = "eks-subnet-${var.environment}"
   }
 }
 
@@ -60,8 +50,28 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name        = "eks-igw-${var.environment}"
-    Environment = var.environment
-    Project     = var.project
+    Name = "eks-igw-${var.environment}"
   }
+}
+
+resource "aws_eip" "nat" {
+  domain = "vpc"
+
+  tags = {
+    Name = "eks-nat-eip-${var.environment}"
+  }
+
+  depends_on = [aws_internet_gateway.main]
+}
+
+
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.subnet-public-1.id
+
+  tags = {
+    Name = "eks-nat-${var.environment}"
+  }
+
+  depends_on = [aws_internet_gateway.main]
 }
