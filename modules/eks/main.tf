@@ -19,6 +19,25 @@ resource "aws_eks_cluster" "main" {
 }
 
 
+resource "aws_eks_access_entry" "eks-access" {
+  cluster_name = aws_eks_cluster.main.name
+  principal_arn = "arn:aws:iam::922344941106:user/mahin"
+  type = "STANDARD"
+}
+
+resource "aws_eks_access_policy_association" "eks-access-policy" {
+  cluster_name  = aws_eks_cluster.main.name
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  principal_arn = "arn:aws:iam::922344941106:user/mahin"
+
+  access_scope {
+    type       = "cluster"
+  }
+
+  depends_on = [ aws_eks_access_entry.eks-access ]
+}
+
+
 resource "aws_eks_node_group" "name" {
   cluster_name    = aws_eks_cluster.main.name
   node_group_name = "${var.cluster_name}-${var.environment}-node-group"
