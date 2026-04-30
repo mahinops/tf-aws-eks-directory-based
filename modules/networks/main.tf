@@ -56,3 +56,12 @@ resource "aws_subnet" "subnet-private-2" {
   }
 }
 
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name        = "eks-igw-${var.environment}"
+    Environment = var.environment
+    Project     = var.project
+  }
+}
