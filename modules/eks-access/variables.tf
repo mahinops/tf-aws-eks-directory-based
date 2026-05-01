@@ -1,9 +1,3 @@
-variable "environment" {
-  description = "The environment to deploy to"
-  type        = string
-  default     = ""
-}
-
 variable "admin_principal_arns" {
   description = "List of IAM principal ARNs to be granted admin access to the EKS cluster"
   type        = list(string)
