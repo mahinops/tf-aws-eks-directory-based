@@ -128,3 +128,11 @@ variable "node_group_max_unavailable" {
   default     = 0
   
 }
+
+
+# eks-access 
+variable "admin_principal_arns" {
+  description = "List of IAM principal ARNs to be granted admin access to the EKS cluster"
+  type        = list(string)
+  default     = []
+}

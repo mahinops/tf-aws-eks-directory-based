@@ -29,3 +29,9 @@ node_group_capacity_type = "ON_DEMAND"
 node_group_instance_types = ["t3.small"]
 node_group_disk_size = 20
 node_group_max_unavailable = 1
+
+
+# eks-access 
+admin_principal_arns = [
+    "arn:aws:iam::922344941106:user/mahin",
+]

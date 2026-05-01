@@ -62,3 +62,11 @@ module "eks" {
   node_group_disk_size = var.node_group_disk_size
   node_group_max_unavailable = var.node_group_max_unavailable
 }
+
+module "eks-access" {
+  source = "../../modules/eks-access"
+
+  environment = var.environment
+  admin_principal_arns = var.admin_principal_arns
+  cluster_name = module.eks.cluster_name
+}
